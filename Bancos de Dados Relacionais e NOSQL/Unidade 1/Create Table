@@ -1,0 +1,42 @@
+-- CREATE database PUC;
+USE PUC;
+-- ETAPA DE CRIAÇÃO DAS TABELAS
+Create table cliente (
+    CodCli numeric(10) not null ,   
+    NomeCli varchar(50) not null,   
+    EndCli varchar(50) null,   
+    BairroCLI varchar(20) null,   
+    CidCli varchar(50) null,   
+    EstadoCli varchar(2) null,   
+    Constraint PK_codcli primary Key(CodCli)
+);
+Create table locacao(   
+    CodCli numeric(10) not null ,   
+    DataLoc date not null,  
+    CodFilme numeric(3) not null  ,
+    DataDevol date null,   
+    Constraint PK_codcliloc primary Key(CodCli)
+);
+Create table filme(   
+    CodFilme numeric(3) not null , 
+    NomeFilme varchar(50) not null,  
+    Cor char(2) NOT null, 
+    Status char(20) null,   
+    CodGenero numeric(3) not null ,  
+    Constraint PK_codcli primary Key(CodFilme)
+);
+Create table preco(   
+    Cor char(2) NOT null, 
+    Valor numeric(10,2) not null ,
+    Constraint PK_Cor primary Key(Cor)
+);
+Create table genero(   
+    CodGenero numeric(3) not null , 
+    Descricao varchar(20) not null,
+    Constraint PK_Genero primary Key(CodGenero)
+);
+-- ETAPA PARA ADICIONAR AS FOREIGN KEY DAS TABELAS
+ALTER TABLE locacao ADD CONSTRAINT FK_cliente_locacao FOREIGN KEY (CodCli) REFERENCES cliente (CodCli);
+ALTER TABLE locacao ADD CONSTRAINT FK_locacao_filme FOREIGN KEY (CodFilme) REFERENCES filme (CodFilme);
+ALTER TABLE filme ADD CONSTRAINT FK_filme_preco FOREIGN KEY (Cor) REFERENCES preco (Cor);
+ALTER TABLE filme ADD CONSTRAINT FK_filme_genero FOREIGN KEY (codgenero) REFERENCES genero (codgenero);
