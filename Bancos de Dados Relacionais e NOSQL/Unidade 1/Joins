@@ -1,0 +1,14 @@
+-- 1 Exibir o nome dos filmes, a descrição de seu gênero, mas somente para os filmes que estão disponíveis (status 'D').
+SELECT F.NomeFilme,G.Descricao 
+FROM filme F, genero G
+WHERE F.Status = 'D' AND F.CodGenero = G.CodGenero;
+
+-- 2 Exibir o nome dos filmes, seu código, e sua data de locação, mas somente para os filmes que ainda não foram devolvidos.
+SELECT F.NomeFilme,F.CodFilme,L.DataLoc
+FROM filme F, locacao L
+WHERE F.CodFilme = L.CodFilme and L.DataDevol IS NULL ;
+
+-- 3 Exibir o código, nome e preço dos filmes do gênero ‘Aventura’.
+SELECT F.NomeFilme,F.CodFilme,P.valor
+FROM filme F, preco P
+WHERE F.cor = P.cor and F.CodGenero = 111 ;
