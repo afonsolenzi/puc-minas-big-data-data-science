@@ -1,0 +1,31 @@
+USE PUC;
+
+INSERT INTO preco (cor, valor) VALUES ('01', 4.50);
+INSERT INTO preco (cor, valor) VALUES ('02', 6.50);
+INSERT INTO preco (cor, valor) VALUES ('03', 8.50);
+INSERT INTO preco (cor, valor) VALUES ('04', 10.50);
+INSERT INTO preco (cor, valor) VALUES ('05', 12.50);
+
+INSERT INTO genero VALUES (111, 'Aventura');
+INSERT INTO genero  VALUES (222, 'Acao');
+INSERT INTO genero  VALUES (333, 'Drama');
+INSERT INTO genero  VALUES (444, 'Suspense');
+INSERT INTO genero  VALUES (555, 'Infantil');
+
+INSERT INTO filme  VALUES (111, 'Desventuras em Série', '01', 'D', 111);
+INSERT INTO filme  VALUES (222, 'A Noite nos Persegue', '02', 'I', 222);
+INSERT INTO filme  VALUES (333, 'Her', '03', 'I', 333);
+INSERT INTO filme VALUES (444, 'Um Lugar Silencioso', '04', 'I', 444);
+INSERT INTO filme  VALUES (555, 'Frozen', '04', 'D', 555);
+
+INSERT INTO cliente  VALUES (1, 'Antonio Carlos', 'Rua Alvaro', 'Arnes', 'Belo Horizonte', 'MG');
+INSERT INTO cliente  VALUES (2, 'Agnes Clara', 'Rua Chagas', 'Bonfim', 'Sampa', 'SP');
+INSERT INTO cliente  VALUES (3, 'Carolzinha', 'Rua Chagas', 'Bonfim', 'Jaraguas', 'SC');
+INSERT INTO cliente  VALUES (4, 'Magali', 'Rua Chagas', 'Bonfim', 'Joinville', 'SC');
+INSERT INTO cliente  VALUES (5, 'Heleninha', 'Rua Chagas', 'Bonfim', 'Jaraguas', 'SC');
+
+INSERT INTO locacao  VALUES (1,  '2020-03-15',222,'2020-03-20');
+INSERT INTO locacao  VALUES (2,  '2020-03-01',444, NULL);
+INSERT INTO locacao  VALUES (3,  '2020-03-27',555, NULL);
+INSERT INTO locacao  VALUES (4,  '2020-03-27',333, NULL);
+INSERT INTO locacao  VALUES (5,  '2020-03-27',111, '2020-03-20');
