@@ -1,0 +1,56 @@
+Habilitar banco MONGODB
+acessar o C:\ utilizando o cd.. 
+
+acessar a pasta bin do mongodb
+	cd '.\Program Files\MongoDB\Server\4.2\bin\'
+
+Executar o arquivo mongod.exe
+	.\mongod.exe
+
+Acessar o banco / cliente
+
+acessar a pasta bin do mongodb
+	cd '.\Program Files\MongoDB\Server\4.2\bin\'
+
+Executar o arquivo mongo.exe
+	.\mongo.exe
+	
+INSERIR ALBUNS
+db.albuns.insert({"nome": "Master of Puppets", "dataLancamento": new Date(1986, 2, 3), "duracao": 3286})
+db.albuns.insert({"nome": "...And Justice for All", "dataLancamento": new Date(1988, 7, 25), "duracao": 3929})
+db.albuns.insert({"nome": "Among the Living", "produtor": "Eddie Kramer"})
+db.albuns.insert({"nome": "Nevermind", "artista": "Nirvana", "estudioGracavao": ["Sound City Studios", "Smart Studios (Madison)"], "dataLancamento": new Date(1992, 0, 11)})
+db.albuns.insert({"nome": "Reign in Blood", "dataLancamento": new Date(1986, 9, 7), "artista": "Larry Carroll", "duracao": 1738})
+db.albuns.insert({"nome": "Seventh Son of a Seventh Son", "artista": "Iron Maiden", "produtor": "Martin Birch", "estudioGracavao": "Musicland Studios", "dataLancamento": new Date(1988, 3, 11)})
+
+INSERIR ARTISTAS
+db.artistas.insert([ {"nome": "Metallica", "id" : "1"},
+{"nome": "Megadeath", "id" : "2"},
+{"nome": "Slayer", "id" : "3"},
+{"nome": "Anthrax", "id" : "4"},
+{"nome": "Iron Maiden", "id" : "5"},
+{"nome": "Nirvana", "id" : "6"},
+{"nome": "Pink Floyd", "id" : "7"}])
+
+UPDATE ALBUNS
+db.albuns.update({"nome" : "Master of Puppets"}, {$set : {"artista_id" : "1"}});
+db.albuns.update({"nome" : "Among the Living"}, {$set : {"artista_id" : "4"}});
+db.albuns.update({"nome" : "Nevermind"}, {$set : {"artista_id" : "6"}});
+db.albuns.update({"nome" : "Reign in Blood"}, {$set : {"artista_id" : "3"}});
+db.albuns.update({"nome" : "Seventh Son of a Seventh Son"}, {$set : {"artista_id" : "5"}});
+db.albuns.update({"nome" : "...And Justice for All"}, {$set : {"artista_id" : "1"}});
+db.albuns.update({"nome" : "The Dark Side of the Moon"}, {$set : {"artista_id" : "7"}});
+
+var artista = db.artistas.findOne({"nome":"Metallica"})
+artista
+
+var albuns = db.albuns.find ({"artista_id":artista.id}).pretty()
+
+IMPORTAR CSVs
+acessar a pasta bin do mongodb
+	cd '.\Program Files\MongoDB\Server\4.2\bin\'
+	
+importar os csvs:
+mongoimport -d teste -c driver --type csv --headerline --file c:\tmp\drivers.csv
+mongoimport -d teste -c timesheet --type csv --headerline --file c:\tmp\timesheet.csv
+mongoimport -d teste -c truck_event_text_partition --type csv --headerline --file c:\tmp\truck_event_text_partition.csv
