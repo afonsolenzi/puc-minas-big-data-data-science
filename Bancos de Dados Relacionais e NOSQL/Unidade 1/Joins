@@ -1,3 +1,5 @@
+use PUC;
+
 -- 1 Exibir o nome dos filmes, a descrição de seu gênero, mas somente para os filmes que estão disponíveis (status 'D').
 SELECT F.NomeFilme,G.Descricao 
 FROM filme F, genero G
@@ -12,3 +14,29 @@ WHERE F.CodFilme = L.CodFilme and L.DataDevol IS NULL ;
 SELECT F.NomeFilme,F.CodFilme,P.valor
 FROM filme F, preco P
 WHERE F.cor = P.cor and F.CodGenero = 111 ;
+
+-- 4 Exibir o código e nome dos filmes de comédia alugadas por clientes do Rio de Janeiro. Exibir também o nome e código desses clientes.
+SELECT F.CodFilme, F.NomeFilme,C.CodCli, C.NomeCli
+FROM locacao L
+  JOIN cliente C ON C.codcli =L.codcli
+  JOIN filme F ON F.CodFilme= L.CodFilme
+WHERE C.EstadoCli = "SC" and F.codgenero = 111; 
+
+-- 5 Exibir o código e nome dos filmes que possuem a mesma cor do filme 230.
+SELECT F.CodFilme, F.NomeFilme
+FROM filme F
+  JOIN Preco P ON F.Cor= P.Cor
+WHERE F.Cor = (select F.Cor from filme F where F.CodFilme = 444); 
+
+-- 6 Exibir o código e nome dos clientes que moram no mesmo estado dos clientes que alugaram filme no mês de outubro.
+SELECT C.CodCli, C.NomeCli
+FROM cliente C
+  INNER JOIN (select distinct CodCli from locacao L where L.DataLoc between ('2020-03-01') and ('2020-03-30'))  AS L ON C.CodCli = L.CodCli
+  where C.EstadoCli = 'SC';
+
+-- 7 Exibir o código e nome dos clientes que realizaram mais locações do que o cliente de código 100.
+SELECT C.CodCli, C.NomeCli
+FROM cliente C, locacao L
+WHERE C.CodCli = L.CodCli and count(L.CodCli)>1;
+  
+-- 8 Exibir o código e nome dos filmes que possuem mesma cor que os filmes de Suspense.
