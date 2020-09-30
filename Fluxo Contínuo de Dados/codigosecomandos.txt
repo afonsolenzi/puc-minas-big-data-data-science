@@ -1,0 +1,76 @@
+Aplicacao dos Conhecimentos - Parte 1 - Unidade 2
+
+Iniciar o Kafka:
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-server-start.sh /home/puc/kafka_2.11-1.0.0/config/server.properties 
+
+Criando o tópico no Kafka:
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic testing
+
+(Already exists)
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic eita-puc
+
+(Already exists)
+
+Listar todos os tópicos criados:
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+Saída>
+ead-puc
+testing
+twittertopic
+
+Script para habilitar escrita no tópico:
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic eita-puc
+(Aguarda por entrada)
+
+Lendo o tópico:
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic eita-puc --from-beginning
+
+-------------------
+Aplicação dos Conhecimentos - Parte 1 - Unidade 2
+
+Reparando os arquivos a serem processados pelo Flume:
+
+Em um novo terminal:
+$ cd /home/puc/apache-flume-1.8.0-bin/spool-test/
+
+$ mv test1.COMPLETED test1 | mv test2.COMPLETED test2 | mv test3.txt.COMPLETED text3.txt | mv test4.COMPLETED test4 | mv teste5.COMPLETED texte5 | mv testeFlume2.COMPLETED testeFlume2 | mv testeFlume3.COMPLETED testeFlume3 | mv testeFlume.COMPLETED testeFlume | mv Untitled\ Document.COMPLETED Untitled\ Document
+
+$ cd /home/puc/apache-flume-1.8.0-bin/conf
+
+$ flume-ng agent --conf-file spool-to-logger.properties --name agent1 -Dflume.root.logger=WARN,console
+
+Professor faz a inserção de novos arquivos para testar.
+Depois disso o professor faz a alteracao do agente para o agent2 para testar
+
+-------------------
+Aplicação dos Conhecimentos - Parte 1 - Unidade 3
+
+$ cd /home/puc/apache-flume-1.8.0-bin/spool-to-kafka/
+
+$ mv kafka-testando.COMPLETED kafka-testando | mv teste2.COMPLETED teste2 | mv Untitled\ Document.COMPLETED Untitled\ Document
+
+$ cd ../conf/
+
+$ flume-ng agent --conf-file spool-to-kafka.properties --name agent2 -Dflume.root.logger=WARN,console
+
+Professor começa a testar arquivos
+
+-------------------
+Aplicação dos Conhecimentos - Parte 1 - Unidade 4
+
+
+Ativando o agente do twitter para o Flume ingerir Twittes:
+
+$ flume-ng agent --conf-file twitter.properties --name agent3 -Dflume.root.logger=WARN,console
+
+Em outro terminal, o comando escuta do tópico que o Flume escreve os Twittes:
+
+$ sudo /home/puc/kafka_2.11-1.0.0/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic twitter topic --from-beginning
+
